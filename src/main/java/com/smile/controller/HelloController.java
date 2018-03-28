@@ -38,7 +38,11 @@ public class  HelloController {
         return "/index";
     }
 
-
+    /**
+     * 获取参数
+     * @param s
+     * @return
+     */
     @RequestMapping(value = "/json", method = RequestMethod.POST)
     @ResponseBody
     public String getJson(@RequestBody String s){
