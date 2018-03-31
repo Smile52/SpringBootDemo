@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
-/**
+/**Girl拦截
  * Created by yaojiulong on 2017/7/25.
  */
 @RestController
@@ -40,8 +40,8 @@ public class GirlController {
      * @return
      */
     @GetMapping(value = "/girl/{id}")
-    public Girl findById(@PathVariable("id") Integer id){
-        return girlRepository.findOne(id);
+    public Result<Girl> findById(@PathVariable("id") Integer id){
+        return ResultUtil.success(girlRepository.findOne(id));
     }
 
   /*  *//**
