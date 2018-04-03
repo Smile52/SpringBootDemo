@@ -2,10 +2,14 @@ package com.smile.controller;
 
 import com.smile.domain.Girl;
 import com.smile.domain.Result;
+import com.smile.repository.GirlPageRepository;
 import com.smile.repository.GirlRepository;
 import com.smile.service.GirlService;
 import com.smile.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +25,9 @@ public class GirlController {
 
     @Autowired
     private GirlRepository girlRepository;
+
+    @Autowired
+    private GirlPageRepository girlPageRepository;
 
     @Autowired
     private GirlService girlService;
@@ -95,6 +102,20 @@ public class GirlController {
     @GetMapping(value = "/girl/getAge/{id}")
     public void getAge(@PathVariable("id") Integer id)throws Exception{
         girlService.getAge(id);
+
+    }
+
+    /**
+     * 分页
+     * @param page
+     * @return
+     */
+    @GetMapping(value = "/girlList/{page}")
+    public Result<List<Girl>> getGirlList(@PathVariable("page") Integer page) {
+        Sort sort = new Sort(Sort.Direction.ASC, "id");
+
+        Pageable pageable = new PageRequest(page,5, sort);
+        return ResultUtil.success(girlPageRepository.findAll(pageable).getContent());
 
     }
 

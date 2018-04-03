@@ -3,6 +3,7 @@ package com.smile.service;
 import com.smile.GirlException;
 import com.smile.domain.Girl;
 import com.smile.enums.ResultEnums;
+import com.smile.repository.GirlPageRepository;
 import com.smile.repository.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class GirlService {
     private GirlRepository girlRepository;
 
 
+
     public void getAge(Integer id) throws Exception{
         Girl girl = girlRepository.findOne(id);
         Integer age = girl.getAge();
@@ -28,4 +30,5 @@ public class GirlService {
         }
 
     }
+
 }
